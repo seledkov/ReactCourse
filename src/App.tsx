@@ -1,44 +1,81 @@
 import React, {Component} from 'react';
 import { JsxAttributeLike } from 'typescript';
+import './App.css'
 import Person from './Person/Person';
 
-interface PersonItem {
-    name: string, age: number
-}
 
-class App extends Component {
+
+class App extends React.Component {
    state = {
         persons: [  
             {name: 'max1', age: 22},
             {name: 'max2', age: 23},
             {name: 'max3', age: 24}
-        ]
+        ],
+        showPersons: true
    }
 
-    changeNameHandler = (newName: string) => { 
-        console.log('click')
-        this.setState( { 
+   deletePersonHandler = (personIndex:number):void => {
+        const persons = this.state.persons;
+        console.log(this.state.persons)
+        persons.splice(personIndex, 1);
+        console.log(this.state.persons)
+        this.setState({persons: persons})
+   }
+
+    changeNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+          this.setState( { 
             persons: [  
-                {name: 'maxim', age: 22},
-                {name: newName, age: 23},
+                {name: 'max1', age: 22},
+                {name: event.target.value, age: 23},
                 {name: 'max3', age: 24}
             ]
-            
         } )
+    }
+ 
+    tooglePersonHandler = (event: React.MouseEvent): void => {
+        let newShowPersons: boolean = this.state.showPersons
+        this.setState({
+            showPersons: !newShowPersons
+        })
     }
 
     render (){
-        const style = {margin: '40px 40px'}
-        return (
+        const style = {
+            backgroundColor: 'lightyellow',
+            border: '1px solid blue',
+            padding: '8px',
+            cursor: 'pointer',
+        }
+
+        let persons = null;
+        if (this.state.showPersons) {
+            persons = 
+                <div>
+                    {this.state.persons.map((person, index) => {
+                        return (
+                               <Person 
+                                  name={person.name}
+                                  age={person.age}
+                                  changed={this.changeNameHandler}
+                                  clicked={()=>this.deletePersonHandler(index)}  
+                                />
+                        )
+                    })}
+          
+             </div>
             
-            <div className='App'
-            style={style}>
+        }
+        return (
+           
+            <div className='App'>
                 <h1>hi</h1>
                 <p> this is working</p>
-                <button onClick={this.changeNameHandler.bind(this, 'maximilian')}>Chenge name</button>   
-                <Person  name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-                <Person click={()=>this.changeNameHandler('max!')} name={this.state.persons[1].name} age={this.state.persons[1].age}>study react!</Person>
-                <Person  name={this.state.persons[2].name} age={this.state.persons[2].age}/>
+                <button
+                     style={style}
+                     onClick={this.tooglePersonHandler}>Toogle Person
+                </button> 
+               {persons}
             </div>
         )
     }
