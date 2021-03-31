@@ -3,32 +3,34 @@ import { JsxAttributeLike } from 'typescript';
 import './App.css'
 import Person from './Person/Person';
 
-
+interface IPerson {
+ id: string, name: string, age: number
+}
 
 class App extends React.Component {
    state = {
         persons: [  
-            {name: 'max1', age: 22},
-            {name: 'max2', age: 23},
-            {name: 'max3', age: 24}
+            {id: 'mama1', name: 'max1', age: 22},
+            {id: 'mama2', name: 'max2', age: 23},
+            {id: 'mama3', name: 'max3', age: 24}
         ],
         showPersons: true
    }
 
    deletePersonHandler = (personIndex:number):void => {
-        const persons = this.state.persons;
-        console.log(this.state.persons)
+        // const persons = this.state.persons.slice();
+        const persons = [...this.state.persons]
+        console.log(persons)
         persons.splice(personIndex, 1);
-        console.log(this.state.persons)
         this.setState({persons: persons})
    }
 
     changeNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
           this.setState( { 
             persons: [  
-                {name: 'max1', age: 22},
-                {name: event.target.value, age: 23},
-                {name: 'max3', age: 24}
+                {id: 'mama1', name: 'max1', age: 22},
+                {id: 'mama2', name: event.target.value, age: 23},
+                {id: 'mama3', name: 'max3', age: 24}
             ]
         } )
     }
@@ -59,7 +61,7 @@ class App extends React.Component {
                                   age={person.age}
                                   changed={this.changeNameHandler}
                                   clicked={()=>this.deletePersonHandler(index)}  
-                                />
+                                  key={person.id}/>
                         )
                     })}
           
