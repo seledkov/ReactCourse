@@ -10,28 +10,40 @@ interface IPerson {
 class App extends React.Component {
    state = {
         persons: [  
-            {id: 'mama1', name: 'max1', age: 22},
-            {id: 'mama2', name: 'max2', age: 23},
-            {id: 'mama3', name: 'max3', age: 24}
+            {id: 'id1', name: 'max1', age: 22},
+            {id: 'id2', name: 'max2', age: 23},
+            {id: 'id3', name: 'max3', age: 24}
         ],
         showPersons: true
    }
 
    deletePersonHandler = (personIndex:number):void => {
-        // const persons = this.state.persons.slice();
+        // const persons = this.state.persons.slice(); // без аргументов копирует массив
         const persons = [...this.state.persons]
         console.log(persons)
-        persons.splice(personIndex, 1);
+        // по индексу удаляем 1элемент
+        persons.splice(personIndex, 1); 
         this.setState({persons: persons})
    }
 
-    changeNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    changeNameHandler = (event: React.ChangeEvent<HTMLInputElement>, id: string) => {
+    // changeNameHandler = (event: React.ChangeEvent, id: string) => {
+           // возвращаем айди элемента если проверка тру
+            const personIndex = this.state.persons.findIndex(p => {
+                //проверка айди каждого элемента массива с переданным айди от евента ченжед
+             return p.id === id
+            })
+            console.log(id)
+            // 
+            console.log(personIndex)
+            const person = {
+                ...this.state.persons[personIndex]
+            }
+            person.name = event.target.value
+            const persons = [...this.state.persons]
+            persons[personIndex] = person
           this.setState( { 
-            persons: [  
-                {id: 'mama1', name: 'max1', age: 22},
-                {id: 'mama2', name: event.target.value, age: 23},
-                {id: 'mama3', name: 'max3', age: 24}
-            ]
+            persons: persons
         } )
     }
  
@@ -59,7 +71,7 @@ class App extends React.Component {
                                <Person 
                                   name={person.name}
                                   age={person.age}
-                                  changed={this.changeNameHandler}
+                                  changed={(event: React.ChangeEvent<HTMLInputElement>)=>this.changeNameHandler(event, person.id)}
                                   clicked={()=>this.deletePersonHandler(index)}  
                                   key={person.id}/>
                         )
