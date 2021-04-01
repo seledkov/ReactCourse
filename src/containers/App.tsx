@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { JsxAttributeLike } from 'typescript';
 import './App.css'
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
+import Person from '../components/Persons/Person/Person';
 
 interface IPerson {
  id: string, name: string, age: number
@@ -69,15 +68,16 @@ class App extends React.Component {
            persons =
              <div>
                {this.state.persons.map((person: IPerson, index: number) => {
-                 return  <ErrorBoundary key={person.id}>
+                 return (
                         <Person
+                     key={person.id}
                      name={person.name}
                      age={person.age}
                      changed={(event: React.ChangeEvent<HTMLInputElement>)=>this.changeNameHandler(event, person.id)}
                      clicked={()=>this.deletePersonHandler(index)}
                      />
 
-                     </ErrorBoundary>
+                     )
                 })}
             </div>
 
@@ -94,18 +94,16 @@ class App extends React.Component {
         }
            
         return (
-         
-           
-
             <div className='App'>
               <h1>hi</h1>
               <p className={classes.join(' ')}> this is working</p>
                 <button
-                //    style={style}
+                // style={style}
                 className='button'
-                   onClick={this.tooglePersonHandler}>Toogle Person
+                onClick={this.tooglePersonHandler}>
+                    Toogle Person
               </button>
-             {persons}
+              {persons}
             </div>
         )
     }
