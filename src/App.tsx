@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { JsxAttributeLike } from 'typescript';
 import './App.css'
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 interface IPerson {
  id: string, name: string, age: number
@@ -55,31 +56,32 @@ class App extends React.Component {
     }
 
     render (){
-        const style = {
-            backgroundColor: 'green',
-            color: 'white',
-            border: '1px solid blue',
-            padding: '8px',
-            cursor: 'pointer',
-        }
+        // const style = {
+        //     backgroundColor: 'green',
+        //     color: 'white',
+        //     border: '1px solid blue',
+        //     padding: '8px',
+        //     cursor: 'pointer',
+        // }
 
         let persons = null;
         if (this.state.showPersons) {
            persons =
              <div>
                {this.state.persons.map((person: IPerson, index: number) => {
-                 return (
-                    <Person
+                 return  <ErrorBoundary key={person.id}>
+                        <Person
                      name={person.name}
                      age={person.age}
                      changed={(event: React.ChangeEvent<HTMLInputElement>)=>this.changeNameHandler(event, person.id)}
                      clicked={()=>this.deletePersonHandler(index)}
-                     key={person.id}/>
-                 )
-              })}
+                     />
+
+                     </ErrorBoundary>
+                })}
             </div>
 
-            style.backgroundColor =' red'
+            // style.backgroundColor =' red'
             // if (this.state.persons.length > 1) style.color = 'blue' // test
         }
 
@@ -90,13 +92,17 @@ class App extends React.Component {
         if (this.state.persons.length<=1){
           classes.push('bold')
         }
+           
         return (
+         
+           
 
             <div className='App'>
               <h1>hi</h1>
               <p className={classes.join(' ')}> this is working</p>
                 <button
-                   style={style}
+                //    style={style}
+                className='button'
                    onClick={this.tooglePersonHandler}>Toogle Person
               </button>
              {persons}
