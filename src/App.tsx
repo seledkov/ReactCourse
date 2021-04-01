@@ -9,7 +9,7 @@ interface IPerson {
 
 class App extends React.Component {
    state = {
-        persons: [  
+        persons: [
             {id: 'id1', name: 'max1', age: 22},
             {id: 'id2', name: 'max2', age: 23},
             {id: 'id3', name: 'max3', age: 24}
@@ -22,7 +22,7 @@ class App extends React.Component {
         const persons = [...this.state.persons]
         console.log(persons)
         // по индексу удаляем 1элемент
-        persons.splice(personIndex, 1); 
+        persons.splice(personIndex, 1);
         this.setState({persons: persons})
    }
 
@@ -34,7 +34,6 @@ class App extends React.Component {
              return p.id === id
             })
             console.log(id)
-            // 
             console.log(personIndex)
             const person = {
                 ...this.state.persons[personIndex]
@@ -42,11 +41,11 @@ class App extends React.Component {
             person.name = event.target.value
             const persons = [...this.state.persons]
             persons[personIndex] = person
-          this.setState( { 
+          this.setState( {
             persons: persons
         } )
     }
- 
+
     tooglePersonHandler = (event: React.MouseEvent): void => {
         let newShowPersons: boolean = this.state.showPersons
         this.setState({
@@ -56,7 +55,8 @@ class App extends React.Component {
 
     render (){
         const style = {
-            backgroundColor: 'lightyellow',
+            backgroundColor: 'green',
+            color: 'white',
             border: '1px solid blue',
             padding: '8px',
             cursor: 'pointer',
@@ -64,37 +64,37 @@ class App extends React.Component {
 
         let persons = null;
         if (this.state.showPersons) {
-            persons = 
-                <div>
-                    {this.state.persons.map((person, index) => {
-                        return (
-                               <Person 
-                                  name={person.name}
-                                  age={person.age}
-                                  changed={(event: React.ChangeEvent<HTMLInputElement>)=>this.changeNameHandler(event, person.id)}
-                                  clicked={()=>this.deletePersonHandler(index)}  
-                                  key={person.id}/>
-                        )
-                    })}
-          
-             </div>
-            
+           persons =
+             <div>
+               {this.state.persons.map((person, index) => {
+                 return (
+                    <Person
+                     name={person.name}
+                     age={person.age}
+                     changed={(event: React.ChangeEvent<HTMLInputElement>)=>this.changeNameHandler(event, person.id)}
+                     clicked={()=>this.deletePersonHandler(index)}
+                     key={person.id}/>
+                 )
+              })}
+            </div>
+
+            style.backgroundColor ='red'
         }
         return (
-           
+
             <div className='App'>
-                <h1>hi</h1>
-                <p> this is working</p>
+              <h1>hi</h1>
+              <p> this is working</p>
                 <button
-                     style={style}
-                     onClick={this.tooglePersonHandler}>Toogle Person
-                </button> 
-               {persons}
+                   style={style}
+                   onClick={this.tooglePersonHandler}>Toogle Person
+              </button>
+             {persons}
             </div>
         )
     }
 
-    
+
 }
 
 
