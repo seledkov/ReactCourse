@@ -7,6 +7,7 @@ interface IPerson {
  id: string, name: string, age: number
 }
 
+
 class App extends React.Component {
    state = {
         persons: [
@@ -19,7 +20,7 @@ class App extends React.Component {
 
    deletePersonHandler = (personIndex:number):void => {
         // const persons = this.state.persons.slice(); // без аргументов копирует массив
-        const persons = [...this.state.persons]
+        const persons: IPerson[] = [...this.state.persons]
         console.log(persons)
         // по индексу удаляем 1элемент
         persons.splice(personIndex, 1);
@@ -35,11 +36,11 @@ class App extends React.Component {
             })
             console.log(id)
             console.log(personIndex)
-            const person = {
+            const person: IPerson = {
                 ...this.state.persons[personIndex]
             }
             person.name = event.target.value
-            const persons = [...this.state.persons]
+            const persons: IPerson[] = [...this.state.persons]
             persons[personIndex] = person
           this.setState( {
             persons: persons
@@ -66,7 +67,7 @@ class App extends React.Component {
         if (this.state.showPersons) {
            persons =
              <div>
-               {this.state.persons.map((person, index) => {
+               {this.state.persons.map((person: IPerson, index: number) => {
                  return (
                     <Person
                      name={person.name}
@@ -78,13 +79,22 @@ class App extends React.Component {
               })}
             </div>
 
-            style.backgroundColor ='red'
+            style.backgroundColor =' red'
+            // if (this.state.persons.length > 1) style.color = 'blue' // test
+        }
+
+        const classes: string[] = [];
+        if (this.state.persons.length<=2){
+          classes.push('red')
+        }
+        if (this.state.persons.length<=1){
+          classes.push('bold')
         }
         return (
 
             <div className='App'>
               <h1>hi</h1>
-              <p> this is working</p>
+              <p className={classes.join(' ')}> this is working</p>
                 <button
                    style={style}
                    onClick={this.tooglePersonHandler}>Toogle Person
