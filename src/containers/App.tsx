@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { JsxAttributeLike } from 'typescript';
 import './App.css'
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit'
 
 interface IPerson {
- id: string, name: string, age: number
-}
-
+  id: string, name: string, age: number
+ }
 
 class App extends React.Component {
    state = {
@@ -55,54 +55,21 @@ class App extends React.Component {
     }
 
     render (){
-        // const style = {
-        //     backgroundColor: 'green',
-        //     color: 'white',
-        //     border: '1px solid blue',
-        //     padding: '8px',
-        //     cursor: 'pointer',
-        // }
 
         let persons = null;
         if (this.state.showPersons) {
-           persons =
-             <div>
-               {this.state.persons.map((person: IPerson, index: number) => {
-                 return (
-                        <Person
-                     key={person.id}
-                     name={person.name}
-                     age={person.age}
-                     changed={(event: React.ChangeEvent<HTMLInputElement>)=>this.changeNameHandler(event, person.id)}
-                     clicked={()=>this.deletePersonHandler(index)}
-                     />
-
-                     )
-                })}
-            </div>
-
-            // style.backgroundColor =' red'
-            // if (this.state.persons.length > 1) style.color = 'blue' // test
+           persons = <Persons 
+               persons={this.state.persons}
+               changed={this.changeNameHandler}
+               clicked={this.deletePersonHandler}/>
         }
-
-        const classes: string[] = [];
-        if (this.state.persons.length<=2){
-          classes.push('red')
-        }
-        if (this.state.persons.length<=1){
-          classes.push('bold')
-        }
-           
+        // ========== App ==============  
         return (
             <div className='App'>
-              <h1>hi</h1>
-              <p className={classes.join(' ')}> this is working</p>
-                <button
-                // style={style}
-                className='button'
-                onClick={this.tooglePersonHandler}>
-                    Toogle Person
-              </button>
+              <Cockpit 
+                persons={this.state.persons}
+                clicked={this.tooglePersonHandler}
+              />
               {persons}
             </div>
         )

@@ -4,6 +4,7 @@ import './Person.css'
 interface PersonProps  {
 name: string,
 age: number,
+//todo
 clicked?: any,
 changed?: any,
 }
