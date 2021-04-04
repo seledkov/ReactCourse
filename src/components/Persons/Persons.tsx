@@ -9,8 +9,9 @@ interface IPerson {
   interface IPersonsProps  {
      //todo if persons: IPerson[] -> jsx error app.tsx into <Persons /> 
    persons: any,
-   clicked?: any,
-   changed?: any,
+   //todo
+   clicked?: (index: number) => void,
+   changed?: (event: React.ChangeEvent, id: number | string) => string,
    }
 const persons = (props: IPersonsProps) => {
  return (
@@ -20,8 +21,8 @@ const persons = (props: IPersonsProps) => {
             key={person.id}
             name={person.name}
             age={person.age}
-            changed={(event: React.ChangeEvent<HTMLInputElement>)=>props.changed(event, person.id)}
-            clicked={()=>props.clicked(index)}
+            changed={(event: React.ChangeEvent<HTMLInputElement>)=>props.changed!(event, person.id)}
+            clicked={()=>props.clicked!(index)}
             />
 
             )
