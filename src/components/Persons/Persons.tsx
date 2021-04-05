@@ -11,18 +11,21 @@ interface IPerson {
    persons: any,
    //todo
    clicked?: (index: number) => void,
-   changed?: (event: React.ChangeEvent, id: number | string) => string,
+   // changed?: (event: React.ChangeEvent, id: number | string) => string | undefined,
+   changed?: any,
    }
 const persons = (props: IPersonsProps) => {
+   console.log('Persons render')
  return (
+
     props.persons.map((person: IPerson, index: number) => {
         return (
                <Person
             key={person.id}
             name={person.name}
             age={person.age}
-            changed={(event: React.ChangeEvent<HTMLInputElement>)=>props.changed!(event, person.id)}
             clicked={()=>props.clicked!(index)}
+            changed={(event: React.ChangeEvent<HTMLInputElement>)=>props.changed!(event, person.id)}
             />
 
             )

@@ -6,7 +6,7 @@ interface ICockpit {
 }
 
 const cockpit = (props: any) => {
-    
+    console.log('Cockpit render')
     // const style = {
      //     backgroundColor: 'green',
      //     color: 'white',
@@ -23,6 +23,7 @@ const cockpit = (props: any) => {
     if (props.persons.length<=1){
       classes.push('bold')
     }
+    
  return (
      <div className="Cockpit">
            <h1>hi</h1>

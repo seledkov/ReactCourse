@@ -9,13 +9,25 @@ interface IPerson {
  }
 
 class App extends React.Component {
+    constructor(props: any ){
+        super(props)
+        console.log('constructor start')
+        // this.state = {} 
+    }
+    static getDerivedStateFromProps(props: any, state: any){
+        console.log('getDerivedStateFromProps', props)
+        return state
+    }
+    componentDidMount(){
+        console.log('componentDidMount start')
+    }
    state = {
         persons: [
             {id: 'id1', name: 'max1', age: 22},
             {id: 'id2', name: 'max2', age: 23},
             {id: 'id3', name: 'max3', age: 24}
         ],
-        showPersons: true
+        showPersons: false
    }
 
    deletePersonHandler = (personIndex:number):void => {
@@ -55,7 +67,7 @@ class App extends React.Component {
     }
 
     render (){
-
+        console.log('render start')
         let persons = null;
         if (this.state.showPersons) {
            persons = <Persons 
