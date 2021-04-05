@@ -1,11 +1,12 @@
 import React from 'react'
 import './Cockpit.css'
 
-interface ICockpit {
-  //todo
+interface ICockpitProps {
+  persons: object[],
+  clicked: (event: React.MouseEvent)=> void
 }
 
-const cockpit = (props: any) => {
+const cockpit = (props: ICockpitProps) => {
     console.log('Cockpit render')
     // const style = {
      //     backgroundColor: 'green',
