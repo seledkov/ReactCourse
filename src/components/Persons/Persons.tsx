@@ -14,9 +14,9 @@ interface IPerson {
    changed?: (event: React.ChangeEvent<HTMLInputElement>, id:string) => void,
    }
 
-class Persons extends Component {}
 const persons = (props: IPersonsProps) => {
    console.log('Persons render')
+   
  return (
 
     props.persons.map((person: IPerson, index: number) => {

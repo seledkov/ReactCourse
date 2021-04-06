@@ -11,20 +11,23 @@ interface IPerson {
 class App extends React.Component {
     constructor(props: any ){
         super(props)
-        console.log('constructor start')
+        console.log('[App] constructor start')
         // this.state = {} 
     }
     static getDerivedStateFromProps(props: any, state: any){
-        console.log('getDerivedStateFromProps', props)
+        console.log('[App] getDerivedStateFromProps', props)
         return state
     }
     componentDidMount(){
-        console.log('componentDidMount start')
+        console.log('[App] componentDidMount start')
     }
+
     shouldComponentUpdate(nextProps: any, nextState: any){
         console.log('[App] shouldComponentUpdate');
+       
         return true;
     }
+
     componentDidUpdate(){
         console.log('[App] componentDidUpdate')
     }
@@ -75,7 +78,7 @@ class App extends React.Component {
     }
 
     render (){
-        console.log('render start')
+        console.log('[App] render start')
         let persons = null;
         if (this.state.showPersons) {
            persons = <Persons 
