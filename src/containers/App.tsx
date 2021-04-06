@@ -21,13 +21,21 @@ class App extends React.Component {
     componentDidMount(){
         console.log('componentDidMount start')
     }
+    shouldComponentUpdate(nextProps: any, nextState: any){
+        console.log('[App] shouldComponentUpdate');
+        return true;
+    }
+    componentDidUpdate(){
+        console.log('[App] componentDidUpdate')
+    }
    state = {
         persons: [
             {id: 'id1', name: 'max1', age: 22},
             {id: 'id2', name: 'max2', age: 23},
             {id: 'id3', name: 'max3', age: 24}
         ],
-        showPersons: false
+        showPersons: false,
+        showCockpit: true
    }
 
    deletePersonHandler = (personIndex:number):void => {
@@ -46,8 +54,8 @@ class App extends React.Component {
                 //проверка айди каждого элемента массива с переданным айди от евента ченжед
              return p.id === id
             })
-            console.log(id)
-            console.log(personIndex)
+            // console.log(id)
+            // console.log(personIndex)
             const person: IPerson = {
                 ...this.state.persons[personIndex]
             }
@@ -76,12 +84,16 @@ class App extends React.Component {
                clicked={this.deletePersonHandler}/>
         }
         // ========== App ==============  
+       
         return (
             <div className='App'>
-              <Cockpit 
+                <button 
+                onClick={()=>{ 
+                    this.setState( {showCockpit: false});
+            }}>delete cocpit</button>
+             { this.state.showCockpit ?(<Cockpit 
                 persons={this.state.persons}
-                clicked={this.tooglePersonHandler}
-              />
+                clicked={this.tooglePersonHandler}/>): null}
               {persons}
             </div>
         )

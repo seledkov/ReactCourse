@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Person from './Person/Person';
 // import IPersons from '../../containers/App'
 
@@ -13,6 +13,8 @@ interface IPerson {
    // props => foo
    changed?: (event: React.ChangeEvent<HTMLInputElement>, id:string) => void,
    }
+
+class Persons extends Component {}
 const persons = (props: IPersonsProps) => {
    console.log('Persons render')
  return (

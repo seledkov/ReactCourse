@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect} from 'react'
 import './Cockpit.css'
 
 interface ICockpitProps {
@@ -6,8 +6,20 @@ interface ICockpitProps {
   clicked: (event: React.MouseEvent)=> void
 }
 
-const cockpit = (props: ICockpitProps) => {
-    console.log('Cockpit render')
+const Cockpit = (props: ICockpitProps) => {
+  console.log('Cockpit render')
+      useEffect(()=> {
+      console.log('useEffect')
+      // console.log('http request...')
+      setTimeout(()=>{
+          alert('UE timeout closed')
+      }, 1000);
+      return () => {
+        // Теперь это также может быть полезно, если у вас есть какая-то операция,
+        //  которую на самом деле следует отменять всякий раз, когда компонент перерисовывается
+        console.log(' UE cleanup')
+      }
+    }, [props.persons])
     // const style = {
      //     backgroundColor: 'green',
      //     color: 'white',
@@ -24,7 +36,7 @@ const cockpit = (props: ICockpitProps) => {
     if (props.persons.length<=1){
       classes.push('bold')
     }
-    
+  
  return (
      <div className="Cockpit">
            <h1>hi</h1>
@@ -39,4 +51,4 @@ const cockpit = (props: ICockpitProps) => {
  )
 }
 
-export default cockpit;
+export default Cockpit;
