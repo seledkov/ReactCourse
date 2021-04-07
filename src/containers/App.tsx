@@ -8,25 +8,30 @@ interface IPerson {
   id: string, name: string, age: number
  }
 
-class App extends React.Component {
+// class App extends React.Component {
+class App extends React.PureComponent {
     constructor(props: any ){
         super(props)
         console.log('[App] constructor start')
         // this.state = {} 
     }
-    static getDerivedStateFromProps(props: any, state: any){
-        console.log('[App] getDerivedStateFromProps', props)
-        return state
-    }
+    // static getDerivedStateFromProps(props: any, state: any){
+    //     console.log('[App] getDerivedStateFromProps', props)
+    //     return state
+    // }
     componentDidMount(){
         console.log('[App] componentDidMount start')
     }
 
-    shouldComponentUpdate(nextProps: any, nextState: any){
-        console.log('[App] shouldComponentUpdate');
-       
-        return true;
-    }
+    // shouldComponentUpdate(nextProps: any, nextState: any){
+    //     console.log('[App] shouldComponentUpdate');
+    //     // if (nextProps.persons !== this.state.persons){
+    //     //     return true
+    //     // } else {
+    //     //     return false
+    //     // }
+    //     return true;
+    // }
 
     componentDidUpdate(){
         console.log('[App] componentDidUpdate')
@@ -96,6 +101,8 @@ class App extends React.Component {
             }}>delete cocpit</button>
              { this.state.showCockpit ?(<Cockpit 
                 persons={this.state.persons}
+                //info transfer optimization
+                personsLength={this.state.persons.length}
                 clicked={this.tooglePersonHandler}/>): null}
               {persons}
             </div>

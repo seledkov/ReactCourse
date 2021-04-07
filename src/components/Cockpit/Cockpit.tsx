@@ -2,14 +2,15 @@ import React, { useEffect} from 'react'
 import './Cockpit.css'
 
 interface ICockpitProps {
-  persons: object[],
+  personsLength: number,
+  persons?: object[],
   clicked: (event: React.MouseEvent)=> void
 }
 
 const Cockpit = (props: ICockpitProps) => {
   console.log('Cockpit render')
       useEffect(()=> {
-      console.log('useEffect')
+      console.log('[Cockpit] use effect 1 ')
       // console.log('http request...')
       setTimeout(()=>{
           alert('UE timeout closed')
@@ -21,6 +22,10 @@ const Cockpit = (props: ICockpitProps) => {
         console.log(' UE cleanup')
       }
     }, [props.persons])
+    useEffect(()=>{
+      console.log('[Cockpit] use effect 2')
+      return ()=>{}
+    })
     
     // const style = {
      //     backgroundColor: 'green',
@@ -32,10 +37,10 @@ const Cockpit = (props: ICockpitProps) => {
      // if (this.state.persons.length > 1) style.color = 'blue' // test
     
     const classes: string[] = [];
-    if (props.persons.length<=2){
+    if (props.personsLength<=2){
       classes.push('red')
     }
-    if (props.persons.length<=1){
+    if (props.personsLength<=1){
       classes.push('bold')
     }
   
@@ -53,4 +58,4 @@ const Cockpit = (props: ICockpitProps) => {
  )
 }
 
-export default Cockpit;
+export default React.memo(Cockpit) ;
