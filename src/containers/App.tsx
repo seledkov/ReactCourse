@@ -3,10 +3,9 @@ import { JsxAttributeLike } from 'typescript';
 import './App.css'
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
-
-interface IPerson {
-  id: string, name: string, age: number
- }
+import IPerson from '../interfaces'
+import WithClass from '../HOC/WithClass'
+import Aux from '../HOC/Auxilliary'
 
 // class App extends React.Component {
 class App extends React.PureComponent {
@@ -94,18 +93,18 @@ class App extends React.PureComponent {
         // ========== App ==============  
        
         return (
-            <div className='App'>
+            <WithClass className='App'>
                 <button 
                 onClick={()=>{ 
                     this.setState( {showCockpit: false});
-            }}>delete cocpit</button>
-             { this.state.showCockpit ?(<Cockpit 
+                }}>delete cocpit</button>
+                {this.state.showCockpit ?(<Cockpit 
                 persons={this.state.persons}
                 //info transfer optimization
                 personsLength={this.state.persons.length}
                 clicked={this.tooglePersonHandler}/>): null}
               {persons}
-            </div>
+            </WithClass>
         )
     }
 
@@ -113,4 +112,4 @@ class App extends React.PureComponent {
 }
 
 
-export default App;
+export default App

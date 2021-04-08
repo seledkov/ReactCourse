@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-// import IPersons from '../../containers/App'
 
-interface IPerson {
-   id: string, name: string, age: number
-  }
+
+import IPerson from '../../interfaces'
+
 
   interface IPersonsProps  {
      //todo if persons: IPerson[] -> jsx error app.tsx into <Persons /> 
