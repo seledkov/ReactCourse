@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import './Person.css'
 import Aux from  '../../../HOC/Auxilliary'
 import withClass from '../../../HOC/withClass'
+import { JsxElement, JsxFragment } from 'typescript'
 
 
 interface IPersonProps  {
@@ -11,15 +12,16 @@ clicked?: () => void,
 // прямая передача ссылки
 changed?: (event: React.ChangeEvent<HTMLInputElement>)=> void
 // changed?: any
+children?: JsxElement
 }
 
-const Person: React.FC<IPersonProps> = (props) => {
+const person = (props:IPersonProps) => {
 
     console.log('Person render')
-    
-return (
+     
     //Aux == React.Fragment == Fragment
-    <Aux>
+return (
+    <Fragment>
         
         <p onClick={props.clicked}>i am {props.name} Person {props.age} age , {props.children}</p>
         {/* создание новой функции вызывающей переданную функцию   онврап=сейфчек=props.changed && props.changed() безопасный вызов фу  если тру то вызови* */}
@@ -27,9 +29,10 @@ return (
         {/* передача ссылки  в ончандж*   */}
         <input onChange={props.changed} value={props.name} type='text'/>
 
-    </Aux>
+    </Fragment>
 )
 }
-
-//todo export default withClass(Person, 'Person') 
-export default withClass(Person, 'Person') 
+export default  withClass(person, 'Person') 
+//tod
+// export default person as JSX.Element
+// export default person

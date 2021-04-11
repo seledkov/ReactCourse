@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Person from './Person/Person';
-
+import withClass from '../../HOC/withClass'
 
 import IPerson from '../../interfaces'
 
@@ -14,13 +14,12 @@ import IPerson from '../../interfaces'
    }
 
 const persons = (props: IPersonsProps) => {
-   console.log('Persons render')
-   
+   console.log('[Persons] Persons render')
  return (
-
+      
     props.persons.map((person: IPerson, index: number) => {
         return (
-               <Person
+                <Person
             key={person.id}
             name={person.name}
             age={person.age}
@@ -28,6 +27,7 @@ const persons = (props: IPersonsProps) => {
             changed={(event: React.ChangeEvent<HTMLInputElement>)=>props.changed!(event, person.id)}
             // changed={(event: React.ChangeEvent<HTMLInputElement>)=>props.changed!(event, person.id)}
             />
+          
 
             )
        })

@@ -4,8 +4,8 @@ import './App.css'
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
 import IPerson from '../interfaces'
-import WithClass from '../HOC/WithClass'
-import Aux from '../HOC/Auxilliary'
+import withClass from '../HOC/withClass'
+import WithClass from '../HOC/WithClass1'
 
 // class App extends React.Component {
 class App extends React.PureComponent {
