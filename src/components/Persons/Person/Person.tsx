@@ -12,6 +12,7 @@ clicked?: () => void,
 // прямая передача ссылки
 changed?: (event: React.ChangeEvent<HTMLInputElement>)=> void
 // changed?: any
+//todo children type?
 children?: JsxElement
 }
 
@@ -21,7 +22,7 @@ const person = (props:IPersonProps) => {
      
     //Aux == React.Fragment == Fragment
 return (
-    <Fragment>
+    <Aux>
         
         <p onClick={props.clicked}>i am {props.name} Person {props.age} age , {props.children}</p>
         {/* создание новой функции вызывающей переданную функцию   онврап=сейфчек=props.changed && props.changed() безопасный вызов фу  если тру то вызови* */}
@@ -29,10 +30,8 @@ return (
         {/* передача ссылки  в ончандж*   */}
         <input onChange={props.changed} value={props.name} type='text'/>
 
-    </Fragment>
+    </Aux>
 )
 }
 export default  withClass(person, 'Person') 
-//tod
-// export default person as JSX.Element
 // export default person

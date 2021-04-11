@@ -5,7 +5,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
 import IPerson from '../interfaces'
 import withClass from '../HOC/withClass'
-import WithClass from '../HOC/WithClass1'
+import WithClass from '../HOC/WithClassName'
 
 // class App extends React.Component {
 class App extends React.PureComponent {
@@ -42,7 +42,8 @@ class App extends React.PureComponent {
             {id: 'id3', name: 'max3', age: 24}
         ],
         showPersons: false,
-        showCockpit: true
+        showCockpit: true,
+        changeCounter: 0,
    }
 
    deletePersonHandler = (personIndex:number):void => {
@@ -69,9 +70,11 @@ class App extends React.PureComponent {
             person.name = event.target.value
             const persons: IPerson[] = [...this.state.persons]
             persons[personIndex] = person
-          this.setState( {
-            persons: persons
-        } )
+          this.setState((prevState: any, props: any) => {
+              return {
+            persons: persons,
+            changeCounter: prevState.changeCounter +1
+        } })
     }
 
     tooglePersonHandler = (event: React.MouseEvent): void => {
