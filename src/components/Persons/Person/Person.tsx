@@ -3,6 +3,7 @@ import './Person.css'
 import Aux from  '../../../HOC/Auxilliary'
 import withClass from '../../../HOC/withClass'
 import { JsxElement, JsxFragment } from 'typescript'
+import PropTypes from 'prop-types'
 
 
 interface IPersonProps  {
@@ -31,7 +32,14 @@ return (
         <input onChange={props.changed} value={props.name} type='text'/>
 
     </Aux>
-)
+    )
 }
+person.propTypes = {
+    clicked: PropTypes.func,
+    changed: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    children: PropTypes.any
+};
 export default  withClass(person, 'Person') 
 // export default person
