@@ -19,7 +19,9 @@ class App extends React.PureComponent {
     //     return state
     // }
     componentDidMount(){
+        //first render
         console.log('[App] componentDidMount start')
+      
     }
 
     // shouldComponentUpdate(nextProps: any, nextState: any){
@@ -33,7 +35,10 @@ class App extends React.PureComponent {
     // }
 
     componentDidUpdate(){
+        //every rerender
         console.log('[App] componentDidUpdate')
+        // передаст фокус на второй найденный инпут если он будет, после каждого рендера
+        // document.querySelectorAll('input')[1]?.focus()
     }
    state = {
         persons: [

@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useRef } from 'react'
 import './Cockpit.css'
 
 interface ICockpitProps {
@@ -8,25 +8,33 @@ interface ICockpitProps {
 }
 
 const Cockpit = (props: ICockpitProps) => {
+//todoimportant
+  const toggleBtnRef = useRef<HTMLButtonElement>(null)
+  
+
+// ========== useEffect test =============
   console.log('Cockpit render')
       useEffect(()=> {
       console.log('[Cockpit] use effect 1 ')
       // console.log('http request...')
-      setTimeout(()=>{
-          alert('UE timeout closed')
-      }, 1000);
-      return () => {
-        // 2.  чтобы быть более точным, он запускается перед запуском функции основного использования, но после (первого) цикла рендеринга
-        // 1. "Теперь это также может быть полезно, если у вас есть какая-то операция,
-        //  которую на самом деле следует отменять всякий раз, когда компонент перерисовывается"с
-        console.log(' UE cleanup')
-      }
-    }, [props.persons])
+      // setTimeout(()=>{
+      //     alert('[Cockpit] timeout closed')
+      // }, 1500);
+      toggleBtnRef.current?.click();
+      // return () => {
+      //   // 2.  чтобы быть более точным, он запускается перед запуском функции основного использования, но после (первого) цикла рендеринга
+      //   // 1. "Теперь это также может быть полезно, если у вас есть какая-то операция,
+      //   //  которую на самом деле следует отменять всякий раз, когда компонент перерисовывается"с
+      //   console.log(' [Cockpit] use effect 1 cleanup')
+      // }
+    }, [])
     useEffect(()=>{
       console.log('[Cockpit] use effect 2')
-      return ()=>{}
+      return ()=>{
+        console.log('[Cockpit] use effect 2 cleanup ')
+      }
     })
-    
+    // ==========================
     // const style = {
      //     backgroundColor: 'green',
      //     color: 'white',
@@ -51,7 +59,9 @@ const Cockpit = (props: ICockpitProps) => {
                 <button
                 // style={style}
                 className='button'
-                onClick={props.clicked}>
+                // onClick={()=>console.log('click')}
+                onClick={props.clicked}
+                ref={toggleBtnRef} >
                     Toogle Person
               </button>
      </div>
