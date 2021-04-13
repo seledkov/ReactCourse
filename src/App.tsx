@@ -1,8 +1,8 @@
 import React from 'react';
-import ExpenseItem from './components/ExpenseItem';
+import Expenses, { IExpenseItem } from './components/Expenses';
 
 const App = (props: any) => {
-  const expenses = [
+  const expenses: IExpenseItem[] = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -24,31 +24,8 @@ const App = (props: any) => {
     },
   ];
   return (
-    <div className={props.className}>
-      <ExpenseItem
-        id={expenses[0].id}
-        title={expenses[0].title}
-        date={expenses[0].date}
-        amount={expenses[0].amount}
-      />
-      <ExpenseItem
-        id={expenses[1].id}
-        title={expenses[1].title}
-        date={expenses[1].date}
-        amount={expenses[1].amount}
-      />{' '}
-      <ExpenseItem
-        id={expenses[2].id}
-        title={expenses[2].title}
-        date={expenses[2].date}
-        amount={expenses[2].amount}
-      />{' '}
-      <ExpenseItem
-        id={expenses[3].id}
-        title={expenses[3].title}
-        date={expenses[3].date}
-        amount={expenses[3].amount}
-      />
+    <div className='App'>
+      <Expenses expenses={expenses} />
     </div>
   );
 };
