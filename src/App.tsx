@@ -1,5 +1,5 @@
 import React from 'react';
-import Expenses, { IExpenseItem } from './components/Expenses';
+import Expenses, { IExpenseItem } from './components/Expenses/Expenses';
 
 const App = (props: any) => {
   const expenses: IExpenseItem[] = [
