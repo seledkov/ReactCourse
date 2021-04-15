@@ -2,7 +2,7 @@ import React from 'react';
 import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
 import './Expenses.css';
-type IExpenses = {
+type IExpensesProps = {
   expenses: IExpenseItem[];
 };
 export type IExpenseItem = {
@@ -11,7 +11,7 @@ export type IExpenseItem = {
   date: Date;
   amount: number;
 };
-const Expenses = (props: IExpenses) => {
+const Expenses = (props: IExpensesProps) => {
   return (
     <Card className='expenses'>
       <ExpenseItem
