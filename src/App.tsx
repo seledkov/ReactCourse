@@ -1,5 +1,6 @@
 import React from 'react';
 import Expenses, { IExpenseItem } from './components/Expenses/Expenses';
+import NewExpense from './components/NewExpense/NewExpense';
 
 const App = (props: any) => {
   const expenses: IExpenseItem[] = [
@@ -25,6 +26,7 @@ const App = (props: any) => {
   ];
   return (
     <div className='App'>
+      <NewExpense />
       <Expenses expenses={expenses} />
     </div>
   );
