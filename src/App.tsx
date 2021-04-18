@@ -24,9 +24,16 @@ const App = (props: any) => {
       date: new Date(2021, 5, 12),
     },
   ];
+
+  const saveExpense = (expenseItem: object) => {
+    const expense = {
+      ...expenseItem,
+    };
+    console.log(expense);
+  };
   return (
     <div className='App'>
-      <NewExpense />
+      <NewExpense onSaveExpense={saveExpense} />
       <Expenses expenses={expenses} />
     </div>
   );

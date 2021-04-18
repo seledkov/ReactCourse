@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { isPropertySignature } from 'typescript';
 
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props: any) => {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
@@ -46,11 +47,12 @@ const ExpenseForm = () => {
       title: enteredTitle,
       amount: enteredAmount,
       date: new Date(enteredDate),
+      id: 'id' + (Math.random() * 10e17).toString(),
     };
+    props.onSaveExpenseDate(expenseData);
     setEnteredTitle('');
     setEnteredAmount('');
     setEnteredDate('');
-    console.log(expenseData);
   };
 
   return (
