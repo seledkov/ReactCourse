@@ -14,9 +14,7 @@ const ExpenseItem = (props: IExpenseItemProps) => {
   console.log('render ExpenseItem');
   const [title, setTitle] = useState(props.title);
   const clickHandler = () => {
-    // let title = 'da';
     console.log(title);
-    // title[1]('dae');
     setTitle('new Title');
   };
   return (
