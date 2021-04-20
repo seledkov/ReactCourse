@@ -15,10 +15,17 @@ export type IExpenseItem = {
 };
 const Expenses = (props: IExpensesProps) => {
   const [enteredFilter, setEnteredFilter] = useState('2020');
+  // currentYear: string потому  что мы ожидаем значение от select
+  // а оно по умолчанию возращается в строковом типе данных or undefind?
   const saveEnteredFilter = (currentYear: string) => {
     setEnteredFilter(currentYear);
-    console.log(enteredFilter);
+    console.log(typeof enteredFilter);
   };
+  const filteredExtenses: IExpenseItem[] = props.expenses.filter(
+    (extenseItem: IExpenseItem) =>
+      extenseItem.date.getUTCFullYear() === +enteredFilter,
+  );
+  console.log(filteredExtenses);
   // console.log(enteredFilter);
   return (
     <Card className='expenses'>
@@ -26,7 +33,8 @@ const Expenses = (props: IExpensesProps) => {
         value={enteredFilter}
         onSaveEnteredFilter={saveEnteredFilter}
       />
-      {props.expenses.map((expense: IExpenseItem) => {
+      {filteredExtenses.map((expense: IExpenseItem) => {
+        // if (expense.date)
         return (
           <ExpenseItem
             id={expense.id}
@@ -37,30 +45,6 @@ const Expenses = (props: IExpensesProps) => {
           />
         );
       })}
-      {/* <ExpenseItem
-          id={props.expenses[0].id}
-          title={props.expenses[0].title}
-          date={props.expenses[0].date}
-          amount={props.expenses[0].amount}
-        />
-        <ExpenseItem
-          id={props.expenses[1].id}
-          title={props.expenses[1].title}
-          date={props.expenses[1].date}
-          amount={props.expenses[1].amount}
-        />
-        <ExpenseItem
-          id={props.expenses[2].id}
-          title={props.expenses[2].title}
-          date={props.expenses[2].date}
-          amount={props.expenses[2].amount}
-        />
-        <ExpenseItem
-          id={props.expenses[3].id}
-          title={props.expenses[3].title}
-          date={props.expenses[3].date}
-          amount={props.expenses[3].amount}
-        /> */}
     </Card>
   );
 };

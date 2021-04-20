@@ -1,5 +1,4 @@
 import React from 'react';
-import { isPropertySignature } from 'typescript';
 
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
@@ -10,7 +9,7 @@ const NewExpense = (props: any) => {
       ...enteredDate,
     };
 
-    props.onSaveExpense(savedData);
+    props.onAddExpense(savedData);
     console.log(savedData);
   };
   return (
