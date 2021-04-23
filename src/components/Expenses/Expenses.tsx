@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import ExpenseItem from './ExpenseItem';
 import ExpensesFilter from './ExpensesFilter';
 import Card from '../UI/Card';
 import './Expenses.css';
+import ExpensesList from './ExpensesList';
 type IExpensesProps = {
   expenses: IExpenseItem[];
 };
 export type IExpenseItem = {
-  key?: string;
   title: string;
   date: Date;
   amount: number;
   id: string;
+  key?: string;
 };
+
 const Expenses = (props: IExpensesProps) => {
   const [enteredFilter, setEnteredFilter] = useState('2020');
   // currentYear: string потому  что мы ожидаем значение от select
@@ -27,24 +28,14 @@ const Expenses = (props: IExpensesProps) => {
   );
   console.log(filteredExtenses);
   // console.log(enteredFilter);
+
   return (
     <Card className='expenses'>
       <ExpensesFilter
         value={enteredFilter}
         onSaveEnteredFilter={saveEnteredFilter}
       />
-      {filteredExtenses.map((expense: IExpenseItem) => {
-        // if (expense.date)
-        return (
-          <ExpenseItem
-            id={expense.id}
-            key={expense.id}
-            title={expense.title}
-            date={expense.date}
-            amount={expense.amount}
-          />
-        );
-      })}
+      <ExpensesList filteredContent={filteredExtenses} />
     </Card>
   );
 };

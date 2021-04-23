@@ -12,9 +12,23 @@ const NewExpense = (props: any) => {
     props.onAddExpense(savedData);
     console.log(savedData);
   };
+  let visibleHandler: boolean = true;
+  const changeVisibleHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // event.preventDefault();
+    console.log('change');
+    return visibleHandler != visibleHandler;
+  };
+
   return (
     <div className='new-expense'>
-      <ExpenseForm onSaveExpenseDate={saveExpenseData} />
+      {visibleHandler ? (
+        <ExpenseForm
+          onSaveExpenseDate={saveExpenseData}
+          onChangeVisibleHandler={changeVisibleHandler}
+        />
+      ) : (
+        <button onClick={changeVisibleHandler}>Add New Expense</button>
+      )}
     </div>
   );
 };
