@@ -52,6 +52,7 @@ const ExpenseForm = (props: any) => {
     setEnteredTitle('');
     setEnteredAmount('');
     setEnteredDate('');
+    props.onChangeVisibleHandler();
   };
 
   return (
@@ -87,7 +88,7 @@ const ExpenseForm = (props: any) => {
         </div>
       </div>
       <div className='new-expense__actions'>
-        <button type='button' onClick={props.changeVisibleHandler}>
+        <button type='button' onClick={props.onChangeVisibleHandler}>
           Cancel
         </button>
         <button type='submit'>Add Expense</button>

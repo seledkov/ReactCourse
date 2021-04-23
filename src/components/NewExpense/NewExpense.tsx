@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
 
 const NewExpense = (props: any) => {
+  const [visibleHandler, setVisibleHandler] = useState(false);
   const saveExpenseData = (enteredDate: object) => {
     const savedData = {
       ...enteredDate,
@@ -12,11 +13,8 @@ const NewExpense = (props: any) => {
     props.onAddExpense(savedData);
     console.log(savedData);
   };
-  let visibleHandler: boolean = true;
-  const changeVisibleHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // event.preventDefault();
-    console.log('change');
-    return visibleHandler != visibleHandler;
+  const changeVisibleHandler = () => {
+    setVisibleHandler(!visibleHandler);
   };
 
   return (
