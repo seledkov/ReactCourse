@@ -14,7 +14,7 @@ const NewExpense = (props: any) => {
     console.log(savedData);
   };
   const changeVisibleHandler = () => {
-    setVisibleHandler(!visibleHandler);
+    setVisibleHandler((prevVisibleHandler) => !prevVisibleHandler);
   };
 
   return (
