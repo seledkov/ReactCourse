@@ -3,6 +3,8 @@ import ExpensesFilter from './ExpensesFilter';
 import Card from '../UI/Card';
 import './Expenses.css';
 import ExpensesList from './ExpensesList';
+import ExpenseChart from './ExpenseChart';
+
 type IExpensesProps = {
   expenses: IExpenseItem[];
 };
@@ -35,6 +37,7 @@ const Expenses = (props: IExpensesProps) => {
         value={enteredFilter}
         onSaveEnteredFilter={saveEnteredFilter}
       />
+      <ExpenseChart filteredExtenses={filteredExtenses} />
       <ExpensesList filteredContent={filteredExtenses} />
     </Card>
   );

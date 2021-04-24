@@ -36,7 +36,7 @@ const App = (props: any) => {
   return (
     <div className='App'>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <ExpenseChart expenses={expenses} />
+
       <Expenses expenses={expenses} />
     </div>
   );

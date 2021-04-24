@@ -5,7 +5,7 @@ const ExpenseChart = (props: any) => {
   const dataItems = [
     { label: 'Jan', value: 0 },
     { label: 'Feb', value: 0 },
-    { label: 'Marh', value: 0 },
+    { label: 'Mar', value: 0 },
     { label: 'Apr', value: 0 },
     { label: 'May', value: 0 },
     { label: 'June', value: 0 },
@@ -19,19 +19,13 @@ const ExpenseChart = (props: any) => {
 
   // get mounth for dataItem
 
-  for (const item of props.expenses) {
-    const index = item.date.getMonth()!;
-    console.log(index);
-    dataItems[index].value = item.amount;
+  for (const item of props.filteredExtenses) {
+    const index = item.date.getMonth();
+    console.log('month', index);
+    dataItems[index].value += item.amount;
   }
 
-  // calc maxValue for chartBar height
-
-  const dataItemsValue = props.expenses.map((dataItem: any) => dataItem.amount);
-  const maxValue = Math.max(...dataItemsValue);
-
-  //   return <Chart />;
-  return <Chart dataItems={dataItems} maxValue={maxValue} />;
+  return <Chart dataItems={dataItems} />;
 };
 
 export default ExpenseChart;
