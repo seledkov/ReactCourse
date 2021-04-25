@@ -1,43 +1,23 @@
 import React, { useState } from 'react';
-import Expenses, { IExpenseItem } from './components/Expenses/Expenses';
-import NewExpense from './components/NewExpense/NewExpense';
-import ExpenseChart from './components/Expenses/ExpenseChart';
+import NewUserForm from './components/NewUser/NewUserForm';
+import './App.css';
+import UsersList from './components/UsersList/UsersList';
 
-const DUMMY_EXPENSES: IExpenseItem[] = [
-  {
-    id: 'e1',
-    title: 'Toilet Paper',
-    amount: 94.12,
-    date: new Date(2020, 7, 14),
-  },
-  { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
-  {
-    id: 'e3',
-    title: 'Car Insurance',
-    amount: 294.67,
-    date: new Date(2021, 2, 28),
-  },
-  {
-    id: 'e4',
-    title: 'New Desk (Wooden)',
-    amount: 450,
-    date: new Date(2021, 5, 12),
-  },
-];
 const App = (props: any) => {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
-  const addExpenseHandler = (expenseItem: IExpenseItem) => {
-    // prevExpenses = является последним обновленным состоянием expenses
-    // и по умолчанию передается при вызове callback в сеттере setExpenses
-    setExpenses((prevExpenses) => {
-      return [expenseItem, ...prevExpenses];
-    });
+  const LoremList: {}[] = [
+    { name: 'user name', age: 20 },
+    { name: 'user name', age: 20 },
+    { name: 'user name', age: 20 },
+  ];
+  const [currentList, getCurrentList] = useState(LoremList);
+  const getNewUser = (newUser: any) => {
+    getCurrentList((prevState) => [...prevState, newUser]);
   };
   return (
+    // modaleErr
     <div className='App'>
-      <NewExpense onAddExpense={addExpenseHandler} />
-
-      <Expenses expenses={expenses} />
+      <NewUserForm onSaveNewUser={getNewUser} />
+      <UsersList list={currentList} />
     </div>
   );
 };

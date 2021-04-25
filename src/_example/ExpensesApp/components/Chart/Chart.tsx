@@ -9,6 +9,7 @@ const Chart = (props: any) => {
   const totalMaximum = Math.max(...dataItemsValue);
 
   console.log('max value', totalMaximum);
+
   return (
     <div className='chart'>
       {props.dataItems.map((dataItem: any) => (

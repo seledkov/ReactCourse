@@ -1,0 +1,19 @@
+P {
+  margin: 5px;
+}
+.user-form {
+  font-weight: bold;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+.user-form__block {
+  margin: 10px 0;
+}
+.user-form__active button {
+  min-width: 120px;
+  height: 30px;
+  color: white;
+  background-color: rgb(110, 15, 165);
+  border-radius: 5px;
+}

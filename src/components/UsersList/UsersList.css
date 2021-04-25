@@ -1,0 +1,15 @@
+li {
+  margin: 5px;
+  list-style: none;
+  border: 1px solid black;
+  padding: 5px;
+}
+ul {
+  list-style: none;
+}
+.users-list {
+  font-weight: bold;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+}
