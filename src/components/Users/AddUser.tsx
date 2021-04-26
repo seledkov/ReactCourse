@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './NewUserForm.css';
+import './AddUser.css';
+import Button from '../UI/Button';
 const NewUserForm = (props: any) => {
   const [EnteredAge, getEnteredAge] = useState(null);
   const [EnteredName, getEnteredName] = useState(null);
@@ -22,20 +23,15 @@ const NewUserForm = (props: any) => {
     console.log(newUser);
   };
   return (
-    <form className='user-form'>
-      <div className='user-form__block'>
-        <p>UserName</p>
-        <input type='text' onChange={getInputEnteredName} />
-      </div>
-      <div className='user-form__block'>
-        <p>Age (Years)</p>
-        <input type='number' onChange={getInputEnteredAge} />
-      </div>
-      <div className='user-form__active'>
-        <button type='submit' onClick={saveNewUser}>
-          Add User
-        </button>
-      </div>
+    <form className='user-form' onSubmit={saveNewUser}>
+      <label htmlFor='username'>UserName</label>
+      <input id='username' type='text' onChange={getInputEnteredName} />
+      <label htmlFor='age'>Age (Years)</label>
+      <input id='age' type='number' onChange={getInputEnteredAge} />
+      <Button type='submit' className='button__form'>
+        Add User
+      </Button>
+      {/* <button type='submit'>Add User</button> */}
     </form>
   );
 };

@@ -1,4 +1,5 @@
-P {
+label {
+  display: block;
   margin: 5px;
 }
 .user-form {
@@ -7,10 +8,8 @@ P {
   padding: 30px;
   border-radius: 10px;
 }
-.user-form__block {
-  margin: 10px 0;
-}
-.user-form__active button {
+.button__form {
+  margin-top: 10px;
   min-width: 120px;
   height: 30px;
   color: white;

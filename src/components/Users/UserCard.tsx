@@ -1,9 +1,8 @@
 import React from 'react';
 
 const UserCard = (props: any) => {
-  console.log(props);
   return (
-    <li>
+    <li onClick={props.clicked}>
       {props.name}: {props.age}
     </li>
   );
