@@ -1,6 +1,7 @@
 import React from 'react';
 import './Users.css';
 import UserCard from './UserCard';
+import { IUser } from '../../App';
 
 const UsersList = (props: any) => {
   const deleteUserCard = (id: number) => {
@@ -10,7 +11,7 @@ const UsersList = (props: any) => {
   console.log(props.list);
   return (
     <ul className='users-list'>
-      {props.list.map((user: any, index: number) => (
+      {props.list.map((user: IUser, index: number) => (
         <UserCard
           clicked={() => deleteUserCard(index)}
           name={user.name}

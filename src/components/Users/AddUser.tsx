@@ -1,37 +1,40 @@
 import React, { useState } from 'react';
 import './AddUser.css';
 import Button from '../UI/Button';
+import { IUser } from '../../App';
 const NewUserForm = (props: any) => {
-  const [EnteredAge, getEnteredAge] = useState(null);
-  const [EnteredName, getEnteredName] = useState(null);
-  const getInputEnteredAge = (event: any) => {
-    const inputAge = event.target.value;
-    console.log(inputAge);
-    getEnteredAge(inputAge);
-  };
-  const getInputEnteredName = (event: any) => {
+  const [EnteredName, setEnteredName] = useState('');
+  const [EnteredAge, setEnteredAge] = useState('');
+  const usernameChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const inputName = event.target.value;
-    console.log(inputName);
-    getEnteredName(inputName);
+    setEnteredName(inputName);
   };
-  const newUser = { name: EnteredName, age: EnteredAge };
-  console.log(newUser);
+  const ageChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputAge = event.target.value;
+    setEnteredAge(inputAge);
+  };
 
-  const saveNewUser = (event: any) => {
+  const newUserData: IUser = { name: EnteredName, age: +EnteredAge };
+
+  // const addNewUser = (event: React.FormEvent<HTMLFormElement>) => {
+  const addNewUser = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onSaveNewUser(newUser);
-    console.log(newUser);
+    props.onSaveNewUser(newUserData);
+    console.log(newUserData);
   };
   return (
-    <form className='user-form' onSubmit={saveNewUser}>
+    <form className='user-form' onSubmit={addNewUser}>
       <label htmlFor='username'>UserName</label>
-      <input id='username' type='text' onChange={getInputEnteredName} />
+      <input id='username' type='text' onChange={usernameChangeHandler} />
+
       <label htmlFor='age'>Age (Years)</label>
-      <input id='age' type='number' onChange={getInputEnteredAge} />
+      <input id='age' type='number' onChange={ageChangeHandler} />
+
       <Button type='submit' className='button__form'>
         Add User
       </Button>
-      {/* <button type='submit'>Add User</button> */}
     </form>
   );
 };
