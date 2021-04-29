@@ -1,0 +1,7 @@
+.error-modal {
+  position: absolute;
+  z-index: 100;
+  width: 70%;
+  padding: 30px;
+  background-color: rgb(224, 93, 17);
+}

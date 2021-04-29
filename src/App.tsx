@@ -10,26 +10,24 @@ export type IUser = {
 };
 const App = (props: any) => {
   // test list
-  const LoremList: IUser[] = [
-    { name: 'user name1', age: 21 },
-    { name: 'user name2', age: 22 },
-    { name: 'user name3', age: 23 },
-  ];
+  const LoremList: IUser[] = [];
   // get new user data from child:  NewUserForm
-  const [currentList, getCurrentList] = useState(LoremList);
-  const getNewUser = (newUser: IUser) => {
-    getCurrentList((prevState: IUser[]) => [...prevState, newUser]);
+  const [currentList, setCurrentList] = useState(LoremList);
+  const addUserHandler = (newUser: IUser) => {
+    setCurrentList((prevState: IUser[]) => [...prevState, newUser]);
   };
-  const deleteUser = (userId: number) => {
+  const deleteUserHandler = (userId: number) => {
     const newCurrentList = [...currentList];
     newCurrentList.splice(userId, 1);
-    getCurrentList(newCurrentList);
+    setCurrentList(newCurrentList);
   };
   return (
     // modalErr
     <div className='App'>
-      <AddUser onSaveNewUser={getNewUser} />
-      <Users list={currentList} onDeleteUser={deleteUser} />
+      <AddUser onAddUser={addUserHandler} />
+      {currentList.length > 0 ? (
+        <Users list={currentList} onDeleteUser={deleteUserHandler} />
+      ) : null}
     </div>
   );
 };
