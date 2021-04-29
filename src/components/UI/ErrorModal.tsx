@@ -13,7 +13,9 @@ const ErrorModal = (props: any) => {
           <p>{props.message}</p>
         </div>
         <footer>
-          <Button type='button'>Закрыть окно</Button>
+          <Button type='button' onClick={props.onVisible}>
+            Закрыть окно
+          </Button>
         </footer>
       </div>
     </Fragment>

@@ -3,12 +3,13 @@ import './AddUser.css';
 import Button from '../UI/Button';
 import { IUser } from '../../App';
 import ErrorModal from '../UI/ErrorModal';
-import { JsxElement } from 'typescript';
 
-let errorItem: boolean = false;
+const lorem: any = {};
 const NewUserForm = (props: any) => {
   const [enteredName, setEnteredName] = useState('');
   const [enteredAge, setEnteredAge] = useState('');
+  const [error, setError] = useState(lorem);
+
   const usernameChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -26,10 +27,18 @@ const NewUserForm = (props: any) => {
     const newUserData: IUser = { name: enteredName, age: +enteredAge };
 
     if (enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
-      errorItem = true;
+      setError({
+        title: 'error1',
+        message: 'please enter a valid name and age (non-empty)',
+      });
+      return;
     }
     if (+enteredAge < 1) {
-      errorItem = true;
+      setError({
+        title: 'error2',
+        message: 'please enter a valid age ( > 0)',
+      });
+      return;
     }
 
     props.onAddUser(newUserData);
@@ -37,36 +46,42 @@ const NewUserForm = (props: any) => {
     setEnteredAge('');
     setEnteredName('');
   };
+  const errorVisibleHandler = () => {
+    setError({});
+  };
   return (
     <div>
-      {errorItem ? (
-        <ErrorModal
-          title='Incorect name and Age'
-          message='error write name and age'
+      {error.title ? (
+        <div>
+          <ErrorModal
+            title={error.title}
+            message={error.message}
+            onVisible={errorVisibleHandler}
+          />
+        </div>
+      ) : null}
+
+      <form className='user-form' onSubmit={addNewUser}>
+        <label htmlFor='username'>UserName</label>
+        <input
+          id='username'
+          type='text'
+          value={enteredName}
+          onChange={usernameChangeHandler}
         />
-      ) : (
-        <form className='user-form' onSubmit={addNewUser}>
-          <label htmlFor='username'>UserName</label>
-          <input
-            id='username'
-            type='text'
-            value={enteredName}
-            onChange={usernameChangeHandler}
-          />
 
-          <label htmlFor='age'>Age (Years)</label>
-          <input
-            id='age'
-            type='number'
-            value={enteredAge}
-            onChange={ageChangeHandler}
-          />
+        <label htmlFor='age'>Age (Years)</label>
+        <input
+          id='age'
+          type='number'
+          value={enteredAge}
+          onChange={ageChangeHandler}
+        />
 
-          <Button type='submit' className='button__form'>
-            Add User
-          </Button>
-        </form>
-      )}
+        <Button type='submit' className='button__form'>
+          Add User
+        </Button>
+      </form>
     </div>
   );
 };
