@@ -5,6 +5,7 @@ import './ErrorModal.css';
 const ErrorModal = (props: any) => {
   return (
     <Fragment>
+      <div className='error-modal__background' onClick={props.onConfirm}></div>
       <div className='error-modal'>
         <header>
           <h2>{props.title}</h2>
@@ -13,7 +14,7 @@ const ErrorModal = (props: any) => {
           <p>{props.message}</p>
         </div>
         <footer>
-          <Button type='button' onClick={props.onVisible}>
+          <Button type='button' onClick={props.onConfirm}>
             Закрыть окно
           </Button>
         </footer>

@@ -3,6 +3,7 @@ import './AddUser.css';
 import Button from '../UI/Button';
 import { IUser } from '../../App';
 import ErrorModal from '../UI/ErrorModal';
+import Wrapper from '../UI/Wrapper';
 
 const lorem: any = {};
 const NewUserForm = (props: any) => {
@@ -46,20 +47,20 @@ const NewUserForm = (props: any) => {
     setEnteredAge('');
     setEnteredName('');
   };
-  const errorVisibleHandler = () => {
+  const errorHandler = () => {
     setError({});
   };
   return (
-    <div>
-      {error.title ? (
+    <Wrapper>
+      {error.title && (
         <div>
           <ErrorModal
             title={error.title}
             message={error.message}
-            onVisible={errorVisibleHandler}
+            onConfirm={errorHandler}
           />
         </div>
-      ) : null}
+      )}
 
       <form className='user-form' onSubmit={addNewUser}>
         <label htmlFor='username'>UserName</label>
@@ -82,7 +83,7 @@ const NewUserForm = (props: any) => {
           Add User
         </Button>
       </form>
-    </div>
+    </Wrapper>
   );
 };
 
