@@ -53,13 +53,11 @@ const NewUserForm = (props: any) => {
   return (
     <Wrapper>
       {error.title && (
-        <div>
-          <ErrorModal
-            title={error.title}
-            message={error.message}
-            onConfirm={errorHandler}
-          />
-        </div>
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
       )}
 
       <form className='user-form' onSubmit={addNewUser}>
