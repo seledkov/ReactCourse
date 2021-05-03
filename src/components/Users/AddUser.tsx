@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './AddUser.css';
 import Button from '../UI/Button';
 import { IUser } from '../../App';
@@ -6,35 +6,45 @@ import ErrorModal from '../UI/ErrorModal';
 import Wrapper from '../UI/Wrapper';
 
 const lorem: any = {};
-const NewUserForm = (props: any) => {
-  const [enteredName, setEnteredName] = useState('');
-  const [enteredAge, setEnteredAge] = useState('');
+const AddUser = (props: any) => {
+  const nameInputRef: any = useRef();
+  const ageInputRef: any = useRef();
+
+  // const [enteredName, setEnteredName] = useState('');
+  // const [enteredAge, setEnteredAge] = useState('');
   const [error, setError] = useState(lorem);
 
-  const usernameChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const inputName = event.target.value;
-    setEnteredName(inputName);
-  };
-  const ageChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputAge = event.target.value;
-    setEnteredAge(inputAge);
-  };
+  // const usernameChangeHandler = (
+  //   event: React.ChangeEvent<HTMLInputElement>,
+  // ) => {
+  //   const inputName = event.target.value;
+  //   setEnteredName(inputName);
+  // };
+  // const ageChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const inputAge = event.target.value;
+  //   setEnteredAge(inputAge);
+  // };
 
   // const addNewUser = (event: React.FormEvent<HTMLFormElement>) => {
   const addNewUser = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newUserData: IUser = { name: enteredName, age: +enteredAge };
+    console.log(nameInputRef.current.value);
+    const newUserData: IUser = {
+      name: nameInputRef.current.value,
+      age: +ageInputRef.current.value,
+    };
 
-    if (enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
+    if (
+      nameInputRef.current.value.trim().length === 0 ||
+      ageInputRef.current.value.trim().length === 0
+    ) {
       setError({
         title: 'error1',
         message: 'please enter a valid name and age (non-empty)',
       });
       return;
     }
-    if (+enteredAge < 1) {
+    if (+ageInputRef.current.value < 1) {
       setError({
         title: 'error2',
         message: 'please enter a valid age ( > 0)',
@@ -43,9 +53,10 @@ const NewUserForm = (props: any) => {
     }
 
     props.onAddUser(newUserData);
-    console.log(newUserData);
-    setEnteredAge('');
-    setEnteredName('');
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
+    // setEnteredAge('');
+    // setEnteredName('');
   };
   const errorHandler = () => {
     setError({});
@@ -65,16 +76,18 @@ const NewUserForm = (props: any) => {
         <input
           id='username'
           type='text'
-          value={enteredName}
-          onChange={usernameChangeHandler}
+          // value={enteredName}
+          // onChange={usernameChangeHandler}
+          ref={nameInputRef}
         />
 
         <label htmlFor='age'>Age (Years)</label>
         <input
           id='age'
           type='number'
-          value={enteredAge}
-          onChange={ageChangeHandler}
+          // value={enteredAge}
+          // onChange={ageChangeHandler}
+          ref={ageInputRef}
         />
 
         <Button type='submit' className='button__form'>
@@ -85,4 +98,4 @@ const NewUserForm = (props: any) => {
   );
 };
 
-export default NewUserForm;
+export default AddUser;
