@@ -51,12 +51,14 @@ const AddUser = (props: any) => {
       });
       return;
     }
-
     props.onAddUser(newUserData);
-    nameInputRef.current.value = '';
-    ageInputRef.current.value = '';
+
     // setEnteredAge('');
     // setEnteredName('');
+
+    // it used DOM API for reset input
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
   };
   const errorHandler = () => {
     setError({});
